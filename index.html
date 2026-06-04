@@ -156,6 +156,8 @@
   .risk-pill.high{background:var(--red-bg);color:var(--red)}
   .risk-pill.medium{background:var(--amber-bg);color:var(--amber)}
   .risk-pill.low{background:var(--green-bg);color:var(--green)}
+  .risk-pill.clickable{cursor:pointer;transition:all .15s}
+  .risk-pill.clickable:hover{transform:translateY(-1px);box-shadow:0 2px 6px rgba(0,0,0,.1)}
 
   /* ---------- Care plan ---------- */
   .cp-header{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1rem;margin-bottom:1rem;box-shadow:var(--shadow)}
@@ -631,6 +633,72 @@
   .role-peek{position:fixed;top:90px;left:24px;z-index:56;display:inline-flex;align-items:center;gap:.4rem;background:#fff;border:1px dashed var(--brand);color:var(--brand-2);padding:.45rem .85rem;border-radius:18px;font-size:.78rem;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
   .role-peek:hover{background:var(--brand-soft);border-style:solid}
   .role-peek-kbd{background:var(--brand-soft);border:1px solid var(--brand);border-radius:4px;padding:1px 6px;font-family:ui-monospace,monospace;font-size:.68rem}
+
+  /* ========== NEW: "Replaces, not adds" badge ========== */
+  .replaces-badge{display:inline-flex;align-items:center;gap:.3rem;background:#f1f5f9;border:1px dashed #94a3b8;color:#475569;padding:.2rem .65rem;border-radius:999px;font-size:.7rem;font-weight:500;font-style:italic;white-space:nowrap}
+  .replaces-badge::before{content:'↻';font-style:normal;font-weight:700;color:var(--brand-2);font-size:.85rem}
+  .replaces-badge:hover{background:#e2e8f0;border-style:solid}
+
+  /* ========== NEW: Geisinger gate strip ========== */
+  .gate-strip{display:flex;align-items:center;gap:.25rem;margin-top:.7rem;padding:.55rem .8rem;background:var(--soft);border:1px dashed var(--line);border-radius:10px;flex-wrap:wrap}
+  .gate-strip-label{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-right:.5rem;display:inline-flex;align-items:center;gap:.3rem}
+  .gate-node{display:inline-flex;align-items:center;gap:.3rem;padding:.25rem .65rem;border-radius:999px;font-size:.72rem;font-weight:600;border:1px solid var(--line);background:#fff;cursor:help;white-space:nowrap}
+  .gate-node.done{background:var(--green-bg);color:var(--green);border-color:#86efac}
+  .gate-node.done::before{content:'✓';font-weight:700;font-size:.75rem}
+  .gate-node.overdue{background:var(--red-bg);color:var(--red);border-color:#fecaca}
+  .gate-node.overdue::before{content:'⚠';font-weight:700}
+  .gate-node.pending{color:var(--muted)}
+  .gate-node.pending::before{content:'○';font-weight:700}
+  .gate-connector{flex:0 0 14px;height:2px;background:var(--line);border-radius:2px}
+  .gate-connector.done{background:#86efac}
+
+  /* ========== NEW: Risk breakdown table ========== */
+  .risk-breakdown{margin-top:.5rem;border-collapse:collapse;width:100%;font-size:.82rem}
+  .risk-breakdown td{padding:.4rem .55rem;border-bottom:1px dashed var(--line)}
+  .risk-breakdown td:last-child{text-align:right;font-weight:700;font-family:ui-monospace,monospace}
+  .risk-breakdown td.pos{color:var(--red)}
+  .risk-breakdown td.neg{color:var(--green)}
+  .risk-breakdown tr.total td{border-top:2px solid var(--text);border-bottom:none;padding-top:.55rem;font-weight:700;font-size:.95rem}
+  .risk-breakdown tr.total td:last-child{color:var(--red)}
+
+  /* ========== NEW: SPICT diff ========== */
+  .spict-diff{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:.5rem;margin-bottom:1rem}
+  @media (max-width:900px){.spict-diff{grid-template-columns:1fr}}
+  .spict-diff-col{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.85rem .95rem}
+  .spict-diff-col.current{border-color:var(--amber);background:#fffdf5}
+  .spict-diff-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem;padding-bottom:.4rem;border-bottom:1px dashed var(--line)}
+  .spict-diff-head h5{margin:0;font-size:.82rem;font-weight:700}
+  .spict-diff-head small{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.04em}
+  .spict-diff-item{padding:.35rem .4rem;font-size:.8rem;display:flex;gap:.4rem;align-items:flex-start;border-radius:4px;margin-bottom:.15rem}
+  .spict-diff-item.kept{color:var(--text)}
+  .spict-diff-item.kept::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+  .spict-diff-item.new{background:var(--amber-bg);border-left:3px solid var(--amber);padding-left:.55rem;color:#92400e;font-weight:600}
+  .spict-diff-item.new::before{content:'⊕';color:var(--amber);font-weight:700;flex-shrink:0}
+  .spict-diff-summary{margin-top:.7rem;padding:.55rem .8rem;background:var(--amber-bg);border-left:3px solid var(--amber);border-radius:4px 8px 8px 4px;font-size:.78rem;color:#92400e;font-weight:600}
+
+  /* ========== NEW: Panel-level 7-step loop strip ========== */
+  .panel-loop-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:.4rem;margin-top:.5rem}
+  .panel-loop-step{background:#fff;border:1px solid var(--line);border-radius:8px;padding:.55rem .5rem;text-align:center;cursor:pointer;transition:all .15s;position:relative}
+  .panel-loop-step:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .panel-loop-step strong{display:block;font-size:.72rem;color:var(--text)}
+  .panel-loop-step .panel-loop-fraction{font-size:1.1rem;font-weight:700;color:var(--brand-2);margin-top:.2rem;font-family:ui-monospace,monospace}
+  .panel-loop-step.has-watch{background:#fffbeb;border-color:#fde68a}
+  .panel-loop-step.has-watch .panel-loop-fraction{color:var(--amber)}
+  .panel-loop-step.has-blocked{background:#fef2f2;border-color:#fecaca}
+  .panel-loop-step.has-blocked .panel-loop-fraction{color:var(--red)}
+  .panel-loop-step.all-done .panel-loop-fraction{color:var(--green)}
+  @media (max-width:1100px){.panel-loop-strip{grid-template-columns:repeat(4,1fr)}}
+
+  /* ========== NEW: Derived (auto-surfaced) worklist row for ESAS jumps ========== */
+  .derived-row{display:grid;grid-template-columns:24px 1.6fr 100px 100px 1.8fr 110px 24px;gap:.6rem;align-items:center;padding:.7rem .8rem;border:1px dashed var(--amber);border-radius:10px;background:#fffbeb;text-align:left;width:100%;margin-bottom:.45rem;cursor:pointer;transition:all .15s}
+  .derived-row:hover{background:#fef3c7;transform:translateX(2px)}
+  .derived-row .priority-dot{width:12px;height:12px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 3px var(--amber-bg)}
+  .derived-row .pname strong{display:block}
+  .derived-row .pname em{color:var(--muted);font-size:.72rem;font-style:normal}
+  .derived-row .action-text strong{display:block;font-weight:600}
+  .derived-row .action-text em{color:var(--muted);font-style:normal;font-size:.72rem}
+  .derived-label{font-size:.6rem;color:var(--amber);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.15rem;display:inline-flex;align-items:center;gap:.25rem}
+  .derived-label::before{content:'⚡';font-size:.72rem}
 </style>
 </head>
 <body>
@@ -720,6 +788,18 @@
 
       <div id="alertBanner" class="alert-banner"></div>
 
+      <!-- NEW: Panel-level 7-step closed loop strip -->
+      <div class="card panel-loop-card">
+        <div class="card-title">
+          <div>
+            <h3>🌿 7-step closed care loop · your panel health</h3>
+            <small>PaTz spine · how many of your patients have cleared each step. Click any step to drill.</small>
+          </div>
+          <span class="replaces-badge" data-tip="Replaces siloed status spreadsheets across atHome / FHT / ED">Replaces siloed status checks</span>
+        </div>
+        <div class="panel-loop-strip" id="panelLoopStrip"></div>
+      </div>
+
       <div class="grid-4">
         <div class="metric" data-tip="All registered palliative patients on your panel">
           <span>My panel</span><strong id="panelCount">5</strong>
@@ -745,7 +825,8 @@
             <h2 id="queueTitle">Maria's next actions</h2>
             <small>Prioritized by event severity, gap age, and recent deterioration signal</small>
           </div>
-          <div class="button-row">
+          <div class="button-row" style="align-items:center">
+            <span class="replaces-badge" data-tip="Replaces Maria's Excel tracker + sticky notes">Replaces Excel tracker</span>
             <button class="ghost-button compact-button" data-go="huddleView">Send to huddle agenda</button>
             <button class="primary-button compact-button" id="completeActionBtn">Mark top action done</button>
           </div>
@@ -776,7 +857,7 @@
               <small>Selected from worklist · click any row above to inspect · or click name to open 360° view</small>
             </div>
             <div class="button-row">
-              <span id="selectedRisk" class="risk-pill high">High</span>
+              <span id="selectedRisk" class="risk-pill high clickable">High</span>
               <button class="ghost-button compact-button" id="openCarePlanBtn">Open care plan →</button>
             </div>
           </div>
@@ -799,6 +880,7 @@
             <li>2+ ED visits in 30 days → red flag</li>
             <li>SPICT reassessment worsened → flag for huddle</li>
             <li>Any ESAS-r symptom ≥4 → care-manager outreach</li>
+            <li>ESAS-r symptom jump ≥2 in &lt;7 days → auto-surface as worklist row</li>
             <li>ACP missing >7 days post-register → Geisinger gate fail</li>
             <li>Caregiver phone unconfirmed >90 days → stale</li>
           </ul>
@@ -812,7 +894,8 @@
       <div class="info-banner">
         <div><strong>Shared palliative register · Georgina</strong>
         <span class="muted">Keyed on OHIP. Visible only to circle-of-care members under PHIPA.</span></div>
-        <div class="button-row">
+        <div class="button-row" style="align-items:center">
+          <span class="replaces-badge" data-tip="Replaces siloed lists in 4 different EMRs">Replaces 4 siloed EMR lists</span>
           <button class="ghost-button compact-button" id="exportRegisterBtn">Export for huddle</button>
           <button class="ghost-button compact-button" id="bulkAssignBtn">Bulk reassign high-risk → Maria</button>
           <button class="primary-button compact-button" id="addPatientBtn">+ Add patient</button>
@@ -841,15 +924,17 @@
     <!-- SCREEN 3 · CARE PLAN -->
     <section id="carePlanView" class="module-view">
       <div class="cp-header">
-        <div>
+        <div style="flex:1;min-width:280px">
           <h2 id="cpName">John Karras</h2>
           <div class="cp-meta">
             <span>Age <b id="cpAge">73</b></span> ·
             <span>OHIP ending <b id="cpOhip">781</b></span> ·
             <span class="tag seg" id="cpSegment">Segment 4 – Palliative</span> ·
-            <span id="cpRisk" class="risk-pill high">High risk</span>
+            <span id="cpRisk" class="risk-pill high clickable">High risk</span>
           </div>
           <small id="cpConditions">Stage IV NSCLC · Heart failure NYHA III</small>
+          <!-- NEW: Geisinger gate strip -->
+          <div id="gateStripHost"></div>
         </div>
         <div class="button-row">
           <button class="ghost-button compact-button" id="openOnePagerBtn">View one-pager</button>
@@ -890,8 +975,12 @@
           </div>
 
           <div class="cp-tab-panel hidden" data-cppanel="spict">
-            <h3>SPICT history</h3>
-            <div id="spictHistory" style="margin-top:.7rem"></div>
+            <h3>SPICT history · baseline vs. current</h3>
+            <small>Auto-diff. New or worsened indicators are highlighted so deterioration is visible at a glance.</small>
+            <!-- NEW: SPICT diff -->
+            <div id="spictDiff"></div>
+            <h4 style="margin-top:1rem">Full history</h4>
+            <div id="spictHistory" style="margin-top:.4rem"></div>
           </div>
 
           <div class="cp-tab-panel hidden" data-cppanel="contact">
@@ -900,7 +989,7 @@
           </div>
 
           <div class="cp-tab-panel hidden" data-cppanel="voice">
-            <h3>Voice → structured note</h3>
+            <h3>Voice → structured note <span class="replaces-badge" data-tip="Replaces post-visit handwritten notes + double-entry into EMR">Replaces handwritten notes</span></h3>
             <small>Record after the visit. AI generates 3 versions — clinical (EMR), family (warm), brief (handoff). Audio auto-deletes in 24h.</small>
             <div style="margin-top:.8rem;text-align:center;background:var(--soft);border:1px dashed var(--line);border-radius:10px;padding:1.2rem">
               <button class="primary-button" id="voiceRecBtn" style="width:80px;height:80px;border-radius:50%;font-size:1.4rem">●</button>
@@ -979,6 +1068,7 @@
       <div class="info-banner">
         <div><strong>30-second palliative identification</strong>
         <span class="muted">Embedded at FHT visits and hospital discharge. Adds patient to register, suggests segment, notifies care manager.</span></div>
+        <span class="replaces-badge" data-tip="Replaces inconsistent ad-hoc 'who's palliative?' judgements">Replaces ad-hoc judgement</span>
       </div>
 
       <div class="progress-bar">
@@ -1059,7 +1149,8 @@
       <div class="info-banner no-print">
         <div><strong>Printable one-pager</strong>
         <span class="muted">The artifact that travels with the patient. ED nurses, paramedics, and SDMs all see the same thing.</span></div>
-        <div class="button-row">
+        <div class="button-row" style="align-items:center">
+          <span class="replaces-badge" data-tip="Replaces faxed care summaries that arrive too late">Replaces faxed summaries</span>
           <button class="ghost-button compact-button" id="walletCardBtn">Generate wallet card</button>
           <button class="primary-button compact-button" id="printOnePageBtn">🖨 Print</button>
         </div>
@@ -1083,7 +1174,8 @@
             <h3>5-field structured loopback</h3>
             <small id="lbTimestamp">Started Jun 3, 22:14 · A. Singh, RN — Southlake ED</small>
           </div>
-          <div class="button-row">
+          <div class="button-row" style="align-items:center">
+            <span class="replaces-badge" data-tip="Replaces the ED fax to GP that often arrives days later">Replaces ED fax to GP</span>
             <button class="ghost-button compact-button" id="lbPickPatientBtn">Switch patient</button>
           </div>
         </div>
@@ -1143,7 +1235,8 @@
       <div class="info-banner">
         <div><strong>Next huddle: Thursday Jun 6, 14:00 · 45 min</strong>
         <span class="muted">Chair: Maria · Supervisor: Dr. M. Patel · Attendees: 3 GPs, 4 nurses</span></div>
-        <div class="button-row">
+        <div class="button-row" style="align-items:center">
+          <span class="replaces-badge" data-tip="Replaces the ad-hoc whiteboard agenda built fresh each meeting">Replaces whiteboard agenda</span>
           <button class="ghost-button compact-button" id="exportAgendaBtn">Export PDF agenda</button>
           <button class="primary-button compact-button" id="meetingModeBtn">▶ Start meeting mode</button>
         </div>
@@ -1189,7 +1282,8 @@
       <div class="info-banner">
         <div><strong>Georgina palliative capacity directory</strong>
         <span class="muted">15–25 entries · weekly Monday confirm-by-email · stale at 7 days · red at 14 days</span></div>
-        <div class="button-row">
+        <div class="button-row" style="align-items:center">
+          <span class="replaces-badge" data-tip="Replaces weekly phone calls to hospices/agencies to check bed availability">Replaces weekly bed-check calls</span>
           <button class="ghost-button compact-button" id="bestCapacityBtn">Suggest best option for selected patient</button>
           <button class="primary-button compact-button" id="verifyCapacityBtn">Send Monday confirm-emails</button>
         </div>
@@ -1217,7 +1311,8 @@
       <div class="info-banner">
         <div><strong>Provider onboarding & access management</strong>
         <span class="muted">PHIPA circle-of-care · ONE ID authenticated · panel reassignments audited</span></div>
-        <div class="button-row">
+        <div class="button-row" style="align-items:center">
+          <span class="replaces-badge" data-tip="Replaces manual access provisioning across separate EMRs">Replaces manual access provisioning</span>
           <button class="ghost-button compact-button" id="reassignBtn">Reassign Maria's panel →</button>
           <button class="primary-button compact-button" id="addProviderBtn">+ Onboard provider</button>
         </div>
@@ -1678,6 +1773,23 @@ const patients = [
       ["May 30 (baseline)","Performance status poor; 2+ admissions; comfort-focus agreed","Baseline"],
       ["Jun 3 (today, after ED)","Add: persistent dyspnea despite optimal Rx","+1 indicator vs. baseline"],
     ],
+    spictIndicators:{
+      baselineDate:"May 30",
+      currentDate:"Jun 3 (post-ED)",
+      baseline:[
+        "Performance status poor or deteriorating",
+        "2+ unplanned hospital admissions in 6 months",
+        "Persistent symptoms despite optimal treatment",
+        "Patient/family agreed to comfort-focused care",
+      ],
+      current:[
+        "Performance status poor or deteriorating",
+        "2+ unplanned hospital admissions in 6 months",
+        "Persistent symptoms despite optimal treatment",
+        "Persistent dyspnea despite optimal Rx",
+        "Patient/family agreed to comfort-focused care",
+      ],
+    },
     tasks:[
       {title:"Call Dr. Lai's office re: escalation signature", owner:"Maria", due:"Today 11:00", done:false},
       {title:"Call Helen (SDM) after signature confirmed", owner:"Maria", due:"Today PM", done:false},
@@ -1752,6 +1864,21 @@ const patients = [
       ["Anxiety","Emotional",5,4,"up"],["Wellbeing","Overall",3,4,"down"],
     ],
     spictHistory:[["May 21 (baseline)","2+ admissions, weight loss, performance decline","Baseline"]],
+    spictIndicators:{
+      baselineDate:"May 21",
+      currentDate:"Jun 3",
+      baseline:[
+        "2+ unplanned hospital admissions in 6 months",
+        "Weight loss >5% in 6 months",
+        "Performance status declining",
+      ],
+      current:[
+        "2+ unplanned hospital admissions in 6 months",
+        "Weight loss >5% in 6 months",
+        "Performance status declining",
+        "Persistent dyspnea despite COPD optimization",
+      ],
+    },
     tasks:[
       {title:"Book goals-of-care visit with Dr. Lai", owner:"Maria", due:"This week", done:false},
       {title:"Call Mark (SDM) to prepare for ACP discussion", owner:"Maria", due:"Today", done:false},
@@ -1820,6 +1947,20 @@ const patients = [
       ["Anxiety","Emotional",2,2,"flat"],["Wellbeing","Overall",6,6,"flat"],
     ],
     spictHistory:[["Mar 15","Advanced physical needs","Baseline"]],
+    spictIndicators:{
+      baselineDate:"Mar 15",
+      currentDate:"Jun 3",
+      baseline:[
+        "Performance status declining (PD-related)",
+        "Recurrent falls",
+        "Increasing care needs",
+      ],
+      current:[
+        "Performance status declining (PD-related)",
+        "Recurrent falls",
+        "Increasing care needs",
+      ],
+    },
     tasks:[
       {title:"Confirm Anita's phone at next check-in", owner:"S. Tran", due:"Tomorrow", done:false},
       {title:"Update one-pager footer", owner:"Maria", due:"Wednesday", done:false},
@@ -1887,6 +2028,21 @@ const patients = [
       ["Anxiety","Emotional",4,3,"up"],["Wellbeing","Overall",4,5,"down"],
     ],
     spictHistory:[["May 26","Pancreatic cancer + CKD + weight loss","Baseline"]],
+    spictIndicators:{
+      baselineDate:"May 26",
+      currentDate:"Jun 3",
+      baseline:[
+        "Cancer with progressive disease",
+        "CKD stage 4",
+        "Weight loss >5% in 6 months",
+      ],
+      current:[
+        "Cancer with progressive disease",
+        "CKD stage 4",
+        "Weight loss >5% in 6 months",
+        "Increasing nausea/appetite loss",
+      ],
+    },
     tasks:[
       {title:"Open ConnectingOntario · DHDR pull", owner:"Maria", due:"Today", done:false},
       {title:"Confirm PRN kit ETA with T. Williams", owner:"Maria", due:"Tomorrow", done:false},
@@ -1954,6 +2110,20 @@ const patients = [
       ["Anxiety","Emotional",2,2,"flat"],["Wellbeing","Overall",6,6,"flat"],
     ],
     spictHistory:[["Mar 22","Known palliative panel","Baseline"]],
+    spictIndicators:{
+      baselineDate:"Mar 22",
+      currentDate:"Jun 3",
+      baseline:[
+        "End-stage CHF (NYHA IV)",
+        "CKD stage 5, no dialysis",
+        "Comfort-focus agreed",
+      ],
+      current:[
+        "End-stage CHF (NYHA IV)",
+        "CKD stage 5, no dialysis",
+        "Comfort-focus agreed",
+      ],
+    },
     tasks:[{title:"Call Emily (SDM) for 6-week check-in", owner:"Maria", due:"Jun 6", done:false}],
     references:{
       dhdr:"Furosemide 80mg · Metolazone 5mg · Morphine 5mg PRN",
@@ -2064,6 +2234,77 @@ const WHY_CLAIMS = {
       {type:"Workflow", text:"Request was routed to Dr. Lai's Georgina FHT inbox Jun 1 09:14. No response yet — auto-followup scheduled in 18h.", detail:"audit log"},
     ],
     raw:{ "field":"escalation_plan", "status":"unsigned", "days_overdue":4, "auto_followup_h":18 }
+  },
+};
+
+/* ---- NEW: Risk score breakdown (Kaiser-style stratification) ---- */
+const RISK_BREAKDOWNS = {
+  john: {
+    total: 92,
+    sub: "Updated 02:00 nightly · sum capped at 100",
+    rows: [
+      ["Baseline (Segment 4 palliative)", 12],
+      ["ED visit in last 30 days (×1)", 28],
+      ["Pain delta 5→7 in 4 days", 18],
+      ["Escalation plan unsigned 4 days", 20],
+      ["Concurrent dyspnea + anxiety escalation", 8],
+      ["Caregiver presence (Helen, co-resident)", -6],
+      ["Days since last contact: 1 (recent)", 12],
+    ],
+  },
+  rita: {
+    total: 88,
+    sub: "Updated 02:00 nightly · sum capped at 100",
+    rows: [
+      ["Baseline (Segment 4 palliative)", 12],
+      ["Recent hospital discharge (within 14d)", 30],
+      ["ACP missing — Geisinger gate failed", 25],
+      ["Caregiver burden (son 45min away)", 14],
+      ["COPD GOLD III re-admission window", 10],
+      ["No active loopback events", -3],
+    ],
+  },
+  naveen: {
+    total: 67,
+    sub: "Updated 02:00 nightly · sum capped at 100",
+    rows: [
+      ["Baseline (Segment 3A advanced physical)", 10],
+      ["Caregiver phone stale 90 days", 22],
+      ["Advanced PD physical needs", 18],
+      ["Symptoms stable (offset)", -8],
+      ["No recent ED contact (offset)", -5],
+      ["Falls history", 14],
+      ["Care plan substantially complete (offset)", -4],
+      ["Days since contact: 5", 20],
+    ],
+  },
+  grace: {
+    total: 72,
+    sub: "Updated 02:00 nightly · sum capped at 100",
+    rows: [
+      ["Baseline (Segment 4 palliative)", 12],
+      ["DHDR reconciliation gap (36h)", 18],
+      ["New home-care referral transition", 14],
+      ["Symptoms worsening (appetite, nausea)", 16],
+      ["Strong SDM presence (offset)", -4],
+      ["Recent ACP signed (offset)", -4],
+      ["Pancreatic + CKD comorbidity load", 20],
+    ],
+  },
+  william: {
+    total: 41,
+    sub: "Updated 02:00 nightly · sum capped at 100",
+    rows: [
+      ["Baseline (Segment 4 palliative)", 12],
+      ["End-stage CHF + CKD5 disease burden", 18],
+      ["All 8 care plan fields signed (offset)", -12],
+      ["No recent ED contact (offset)", -5],
+      ["Symptoms stable (offset)", -6],
+      ["Hospice backup confirmed (offset)", -4],
+      ["Routine 6-week check-in due", 8],
+      ["Strong SDM engagement (offset)", -2],
+      ["Days since contact: 24 (longer)", 32],
+    ],
   },
 };
 
@@ -2249,6 +2490,159 @@ window.switchRole = function(role){
           : "👩‍⚕️ Back to Maria's view");
 };
 
+/* ===================== NEW: GEISINGER GATE COMPUTATION ===================== */
+function computeGates(p){
+  const acpField = p.fields.find(f=>f.label.includes("ACP"));
+  const sdmField = p.fields.find(f=>f.label.includes("Substitute"));
+  const escField = p.fields.find(f=>f.label.includes("Escalation"));
+  const medField = p.fields.find(f=>f.label.includes("Medication"));
+  function status(field, dayThreshold){
+    if(field && field.status==="signed") return "done";
+    if(p.daysOnRegister > dayThreshold) return "overdue";
+    return "pending";
+  }
+  return [
+    {label:"Day 0 · Register", status:"done", tip:"Patient added to shared register"},
+    {label:"Day 7 · ACP signed", status:status(acpField,7), tip:"Geisinger gate: goals-of-care + DNR within 7 days"},
+    {label:"Day 14 · SDM confirmed", status:status(sdmField,14), tip:"Geisinger gate: SDM identified & contact verified"},
+    {label:"Day 21 · Med reconciliation", status:status(medField,21), tip:"DHDR reconciliation completed"},
+    {label:"Day 30 · Escalation plan signed", status:status(escField,30), tip:"Geisinger gate: signed escalation pathway"},
+  ];
+}
+function renderGateStrip(p){
+  const gates = computeGates(p);
+  let html = '<div class="gate-strip"><span class="gate-strip-label">🎯 Geisinger gates</span>';
+  gates.forEach((g,i)=>{
+    if(i>0){
+      const prevDone = gates[i-1].status==="done";
+      html += `<span class="gate-connector ${prevDone?'done':''}"></span>`;
+    }
+    html += `<span class="gate-node ${g.status}" data-tip="${escapeHtml(g.tip)}">${g.label}</span>`;
+  });
+  html += '</div>';
+  return html;
+}
+
+/* ===================== NEW: RISK BREAKDOWN POPOVER ===================== */
+window.openRiskWhy = function(patientId){
+  const p = patients.find(x=>x.id===patientId);
+  const breakdown = RISK_BREAKDOWNS[patientId];
+  if(!p || !breakdown){ showToast("No breakdown available"); return; }
+  const sumCheck = breakdown.rows.reduce((s,r)=>s+r[1],0);
+  document.getElementById("whyPopCard").innerHTML = `
+    <div class="why-pop-head">
+      <div class="why-pop-icon">?</div>
+      <div style="flex:1">
+        <div class="why-pop-title">Why is ${p.name}'s risk score ${breakdown.total}?</div>
+        <div class="why-pop-sub">Kaiser dynamic stratification · nightly rules engine</div>
+      </div>
+    </div>
+    <div class="why-claim">
+      <span class="why-claim-label">How it's composed</span>
+      Each line is a discrete rule with a fixed weight. The score is the sum (capped at 100). <em>${escapeHtml(breakdown.sub)}</em>
+    </div>
+    <table class="risk-breakdown">
+      ${breakdown.rows.map(([label,pts])=>`<tr><td>${escapeHtml(label)}</td><td class="${pts>=0?'pos':'neg'}">${pts>0?'+':''}${pts}</td></tr>`).join("")}
+      <tr class="total"><td>Total risk score</td><td>${Math.min(100,Math.max(0,sumCheck))}</td></tr>
+    </table>
+    <div style="margin-top:.7rem;padding:.55rem .75rem;background:var(--soft);border-radius:8px;font-size:.75rem;color:var(--muted)">
+      🔒 Score is a decision-support input only. It never auto-actions. Care manager always has final say. Source rules viewable in audit log.
+    </div>
+    <div class="why-actions" style="margin-top:.8rem">
+      <button class="why-btn-trust" onclick="closeWhyPop();showToast('🌟 Composition trusted')">Makes sense</button>
+      <button class="why-btn-challenge" onclick="closeWhyPop();showToast('✎ Weighting challenge logged for review')">Disagree with weighting</button>
+    </div>
+  `;
+  document.getElementById("whyPopBg").classList.add("show");
+};
+
+/* ===================== NEW: SPICT BASELINE-VS-CURRENT DIFF ===================== */
+function renderSpictDiff(p){
+  if(!p.spictIndicators) return '<div class="empty-state">No SPICT indicator history captured for this patient yet.</div>';
+  const ind = p.spictIndicators;
+  const baselineSet = new Set(ind.baseline);
+  const newOnes = ind.current.filter(c=>!baselineSet.has(c));
+  const currentSet = new Set(ind.current);
+  const removed = ind.baseline.filter(b=>!currentSet.has(b));
+  return `
+    <div class="spict-diff">
+      <div class="spict-diff-col">
+        <div class="spict-diff-head"><h5>Baseline</h5><small>${escapeHtml(ind.baselineDate)}</small></div>
+        ${ind.baseline.map(b=>`<div class="spict-diff-item kept">${escapeHtml(b)}</div>`).join("")}
+      </div>
+      <div class="spict-diff-col current">
+        <div class="spict-diff-head"><h5>Current</h5><small>${escapeHtml(ind.currentDate)}</small></div>
+        ${ind.current.map(c=>{
+          const isNew = !baselineSet.has(c);
+          return `<div class="spict-diff-item ${isNew?'new':'kept'}">${escapeHtml(c)}${isNew?' <span style="font-size:.7rem;margin-left:.3rem;opacity:.8">(new)</span>':''}</div>`;
+        }).join("")}
+      </div>
+    </div>
+    <div class="spict-diff-summary">
+      ${newOnes.length===0 && removed.length===0
+        ? '✓ No change since baseline — patient stable on SPICT criteria.'
+        : `⚡ ${newOnes.length} new indicator${newOnes.length===1?'':'s'} since baseline${removed.length?` · ${removed.length} resolved`:''}. Consider huddle review.`}
+    </div>
+  `;
+}
+
+/* ===================== NEW: ESAS JUMP DETECTION ===================== */
+function getSymptomEscalations(){
+  const out = [];
+  visiblePatients().forEach(p=>{
+    const jumps = p.esas.filter(([s,d,cur,prev,trend])=>trend==="up" && (cur-prev)>=2);
+    if(jumps.length){
+      out.push({
+        patientId:p.id,
+        patient:p,
+        symptoms:jumps.map(j=>`${j[0]} ${j[3]}→${j[2]}`),
+      });
+    }
+  });
+  return out;
+}
+function renderDerivedRows(){
+  const esc = getSymptomEscalations();
+  if(!esc.length) return "";
+  return esc.map(e=>`
+    <button class="derived-row" data-derived-id="${e.patientId}" type="button">
+      <span class="priority-dot"></span>
+      <div class="pname">
+        <div class="derived-label">Auto · ESAS jump</div>
+        <strong class="patient-link" onclick="event.stopPropagation();openClientDrawer('${e.patientId}')">${e.patient.name}</strong>
+        <em>${e.patient.age}${e.patient.sex?"·"+e.patient.sex:""} · OHIP ···${e.patient.ohip}</em>
+      </div>
+      <span class="tag seg">${e.patient.segment.split(' – ')[0]}</span>
+      <span class="tag gap">SYMPTOM</span>
+      <div class="action-text"><strong>Symptom escalation review</strong><em>${e.symptoms.join(' · ')}</em></div>
+      <span class="due-tag today">Today</span>
+      <span class="chev">›</span>
+    </button>
+  `).join("");
+}
+
+/* ===================== NEW: PANEL-LEVEL 7-STEP LOOP ===================== */
+function renderPanelLoop(){
+  const host = $("#panelLoopStrip");
+  if(!host) return;
+  const panel = visiblePatients();
+  if(!panel.length){ host.innerHTML = ''; return; }
+  const steps = ["Identify","Register","Assign","Care plan","Handoff","Loopback","Review"];
+  host.innerHTML = steps.map((step,i)=>{
+    let done=0, watch=0, blocked=0;
+    panel.forEach(p=>{
+      const s = p.loop[i]; if(!s) return;
+      if(s[2]==="done") done++; else if(s[2]==="watch") watch++; else if(s[2]==="blocked") blocked++;
+    });
+    const cls = blocked ? "has-blocked" : watch ? "has-watch" : (done===panel.length ? "all-done":"");
+    const tip = `${done} done · ${watch} watch · ${blocked} blocked`;
+    return `<div class="panel-loop-step ${cls}" data-tip="${tip}" data-panel-loop="${i}">
+      <strong>${step}</strong>
+      <div class="panel-loop-fraction">${done}/${panel.length}</div>
+    </div>`;
+  }).join("");
+}
+
 /* ===================== RENDER: WORKLIST ===================== */
 function filteredByRange(panel){
   if(activeRange==="overdue") return panel.filter(p=>p.due==="Overdue");
@@ -2299,11 +2693,13 @@ function priorityCategoryClass(p){return p.category==="event"?"event":p.category
 function renderPriorityList(){
   if(!$("#priorityList")) return;
   const list = filteredByTab(filteredByRange(visiblePatients()));
-  if(list.length===0){
+  // NEW: prepend derived (auto-surfaced) symptom escalation rows
+  const derivedHtml = (activeWLTab==="all" || activeWLTab==="gap") ? renderDerivedRows() : "";
+  if(list.length===0 && !derivedHtml){
     $("#priorityList").innerHTML = `<div class="empty-state">No items match this tab + range. Try "All" or "This week".</div>`;
     return;
   }
-  $("#priorityList").innerHTML = list.map(p=>`
+  $("#priorityList").innerHTML = derivedHtml + list.map(p=>`
     <button class="worklist-row ${p.id===selectedId?"selected":""}" data-id="${p.id}" type="button">
       <span class="priority-dot ${p.risk}"></span>
       <div class="pname"><strong class="patient-link" onclick="event.stopPropagation();openClientDrawer('${p.id}')">${p.name}</strong><em>${p.age}${p.sex?"·"+p.sex:""} · OHIP ···${p.ohip} · ${p.daysOnRegister}d on register</em></div>
@@ -2320,8 +2716,10 @@ function renderSelected(){
   if(!$("#selectedPatientTitle")) return;
   const p = selectedPatient();
   $("#selectedPatientTitle").innerHTML = `<span class="patient-link" onclick="openClientDrawer('${p.id}')">${p.name}</span>`;
-  $("#selectedRisk").textContent = riskLabel(p.risk) + " risk";
-  $("#selectedRisk").className = `risk-pill ${p.risk==="red"?"high":p.risk==="amber"?"medium":"low"}`;
+  $("#selectedRisk").textContent = riskLabel(p.risk) + " risk · " + p.riskScore;
+  $("#selectedRisk").className = `risk-pill clickable ${p.risk==="red"?"high":p.risk==="amber"?"medium":"low"}`;
+  $("#selectedRisk").onclick = ()=>openRiskWhy(p.id);
+  $("#selectedRisk").setAttribute("data-tip","Click to see how this score was composed");
   const whyId = "rec-"+p.id;
   $("#nextActionCard").innerHTML = `
     <strong>Recommended next step · ${p.owner} · due ${p.due} ${WHY_CLAIMS[whyId]?`<span class="why-chip" onclick="openWhyPop('${whyId}')">why?</span>`:""}</strong>
@@ -2331,9 +2729,8 @@ function renderSelected(){
       <button class="ghost-button compact-button" data-action="modify-rec">Modify</button>
       <button class="ghost-button compact-button" data-action="override-rec">Override</button>
     </div>`;
-  const riskWhy = p.id==="rita" ? "rita-fast" : null;
   $("#riskExplainer").innerHTML = `
-    <strong>Why risk score = ${p.riskScore} ${riskWhy?`<span class="why-chip" onclick="openWhyPop('${riskWhy}')">why?</span>`:""}</strong>
+    <strong>Why risk score = ${p.riskScore} <span class="why-chip" onclick="openRiskWhy('${p.id}')">breakdown</span></strong>
     <ul>${p.riskFactors.map(f=>`<li>${f}</li>`).join("")}</ul>`;
   $("#careTeamMini").innerHTML = p.team.slice(0,4).map(([role,name])=>`<li><div><strong>${role}</strong>${name}</div></li>`).join("");
 }
@@ -2370,9 +2767,14 @@ function renderCarePlan(){
   $("#cpAge").textContent = p.age;
   $("#cpOhip").textContent = p.ohip;
   $("#cpSegment").textContent = `Segment ${p.segment}`;
-  $("#cpRisk").textContent = riskLabel(p.risk)+" risk";
-  $("#cpRisk").className = `risk-pill ${p.risk==="red"?"high":p.risk==="amber"?"medium":"low"}`;
+  $("#cpRisk").textContent = riskLabel(p.risk)+" risk · "+p.riskScore;
+  $("#cpRisk").className = `risk-pill clickable ${p.risk==="red"?"high":p.risk==="amber"?"medium":"low"}`;
+  $("#cpRisk").onclick = ()=>openRiskWhy(p.id);
+  $("#cpRisk").setAttribute("data-tip","Click for risk composition");
   $("#cpConditions").textContent = p.conditions;
+
+  // NEW: Geisinger gate strip
+  $("#gateStripHost").innerHTML = renderGateStrip(p);
 
   const whyId = "rec-"+p.id;
   $("#cpRecommendation").innerHTML = `
@@ -2418,6 +2820,9 @@ function renderCarePlan(){
       <div>${arrow} <small>was ${prev}</small></div>
     </div>`;
   }).join("");
+
+  // NEW: SPICT diff (baseline vs current)
+  $("#spictDiff").innerHTML = renderSpictDiff(p);
 
   $("#spictHistory").innerHTML = p.spictHistory.map(([d,findings,diff])=>`
     <div class="decision-item"><strong>${d}</strong><span>${findings}</span><span>${diff}</span></div>`).join("");
@@ -2631,7 +3036,7 @@ function renderActivity(){
 
 /* ===================== RENDER ALL ===================== */
 function renderAll(){
-  renderAlertBanner(); renderPriorityList(); renderRegister(); renderSelected();
+  renderAlertBanner(); renderPanelLoop(); renderPriorityList(); renderRegister(); renderSelected();
   renderAgenda(); renderDecisions(); renderCapacity(); renderProviders(); renderActivity();
 }
 
@@ -2689,7 +3094,7 @@ function renderClientDrawerHTML(p){
         </div>
         <div class="drawer-fact-row"><div class="drawer-fact-label">Conditions</div><div class="drawer-fact-val">${p.conditions}</div></div>
         <div class="drawer-fact-row"><div class="drawer-fact-label">SDM</div><div class="drawer-fact-val">${p.team[p.team.length-1][1]}</div></div>
-        <div class="drawer-fact-row"><div class="drawer-fact-label">Risk score</div><div class="drawer-fact-val"><b>${p.riskScore}</b> / 100 · ${riskLabel(p.risk)}</div></div>
+        <div class="drawer-fact-row"><div class="drawer-fact-label">Risk score</div><div class="drawer-fact-val"><b>${p.riskScore}</b> / 100 · ${riskLabel(p.risk)} <span class="why-chip" onclick="openRiskWhy('${p.id}')">breakdown</span></div></div>
         <div class="drawer-fact-row"><div class="drawer-fact-label">Care plan</div><div class="drawer-fact-val">${p.carePlanScore}% complete</div></div>
         <div class="drawer-fact-row"><div class="drawer-fact-label">Last contact</div><div class="drawer-fact-val">${p.lastContact}</div></div>
       </div>
@@ -3226,6 +3631,7 @@ function addNewPatient(){
     fields: ["Preferred place of care/death","Goals of care","Substitute Decision Maker","Caregiver primary contact","ACP / DNR status","Medication reconciliation vs. DHDR","Symptom plan","Escalation plan"].map(label=>({label, value:"Pending", status:"unsigned", signer:"Awaiting baseline", date:"24h left"})),
     esas:["Pain","Tiredness","Drowsiness","Nausea","Lack of appetite","Shortness of breath","Depression","Anxiety","Wellbeing"].map((n,i)=>[n,i<6?"Physical":i<8?"Emotional":"Overall",0,0,"flat"]),
     spictHistory:[["Today",$("#newAssessmentTool").value,"Baseline"]],
+    spictIndicators:{baselineDate:"Today",currentDate:"Today",baseline:["New intake — indicators TBD"],current:["New intake — indicators TBD"]},
     tasks:[
       {title:"Create baseline care plan", owner:"Maria", due:"Today", done:false},
       {title:"Notify GP and request ACP visit", owner:"Maria", due:"Tomorrow", done:false},
@@ -3264,6 +3670,33 @@ function bindEvents(){
   document.addEventListener("click",(e)=>{
     const nav = e.target.closest("[data-view]"); if(nav) setView(nav.dataset.view);
     const go = e.target.closest("[data-go]"); if(go){ e.preventDefault(); setView(go.dataset.go); }
+
+    // NEW: derived row click — go to ESAS tab
+    const derived = e.target.closest("[data-derived-id]");
+    if(derived){
+      selectedId = derived.dataset.derivedId;
+      activeCPTab = "esas";
+      setView("carePlanView");
+      renderAll();
+      return;
+    }
+
+    // NEW: panel-loop step click — show drill
+    const panelLoop = e.target.closest("[data-panel-loop]");
+    if(panelLoop){
+      const stepIdx = +panelLoop.dataset.panelLoop;
+      const stepNames = ["Identify","Register","Assign","Care plan","Handoff","Loopback","Review"];
+      const panel = visiblePatients();
+      const detail = panel.map(p=>{
+        const s = p.loop[stepIdx]; if(!s) return null;
+        const icon = s[2]==="done"?"✓":s[2]==="watch"?"⚠":s[2]==="blocked"?"⛔":"○";
+        return `<li><b>${escapeHtml(p.name)}</b> ${icon} ${escapeHtml(s[1])}</li>`;
+      }).filter(Boolean).join("");
+      showGenericDialog(`Step ${stepIdx+1}: ${stepNames[stepIdx]} · panel detail`,
+        `<ul style="line-height:1.8;font-size:.85rem">${detail}</ul>`,
+        [{label:"Close",kind:"primary",action:()=>{}}]);
+      return;
+    }
 
     const trigger = e.target.closest(".patient-row,.worklist-row");
     if(trigger && !e.target.closest(".patient-link")){
